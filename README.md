@@ -9,7 +9,7 @@ One of my favorite facts about physics is that the Lorentz group in $d=3+1$ dime
 
 ## The Code
 
-To get the positions and magnitudes of the stars, we use the Yale Bright Star Catalogue[^1]. This is accessed using Vizier[^2][^3], which in turn is queried with `astroquery`[^4]. Once the data is available, a few manipulations are done with AstroPy[^5][^6][^7] to get the coordinates in radians. Once the data is available in a `.csv` file, `Asymptote` [^8][^9] handles the plotting.
+To get the positions and magnitudes of the stars, we use the Yale Bright Star Catalogue[^1]. This is accessed using Vizier[^2][^3], which in turn is queried with `astroquery`[^4]. Once the data is available, a few manipulations are done with AstroPy[^5][^6][^7] to get the coordinates in radians. This stuff is all handled in `ybsc-astropy.py`. Once the data is available in a `.csv` file, `Asymptote` [^8][^9] handles the plotting through `CKV.asy`.
 
 ## The Physics
 
@@ -25,17 +25,32 @@ First, let us get a very detailed picture of the night sky. No boosts, no rotati
 asy -u "size(10cm); m_cutoff=15; dark_background=true" -render 16 -f png -o example-1 CKV.asy
 ```
 
+Here's our output:
+
+<img src="example-1.png" alt="example-1" width="75%">
+
 Next we try something different. Let us allow a smaller resolution (`-render 4`), less stars (so no improving the magnitude cutoff), not changing the output size (the default is 6 cm). However, put a 90° rotation about the vertical axis to change things a bit.
 
 ```
 asy -u "ang=pi/2; dark_background=true" -render 4 -f png -o example-2 CKV.asy
 ```
 
+The output is 
+
+<img src="example-2.png" alt="example-2" width="75%">
+
+The lower size and resolution make it a bit more cartoonish (but it renders faster).
+
+
 Finally, let us try a boost. To make things crystal clear, we pick something at 75% of the speed of light. 
 
 ```
 asy -u "vel=0.75; dark_background=true" -render 4 -f png -o example-3 CKV.asy
 ```
+
+This time we get
+
+<img src="example-3.png" alt="example-1" width="75%">
 
 If you want a simple visualization with a four-screw (a boost and a rotation about the same direction), which is the transformations I use in talks, try this code. Ajust the parameters of `vel` (boost velocity as a fraction of the speed of light) and `and` (rotation angle in radians) as you prefer. The `-V` setup will make the `Asymptote` visualization window popup, and show the full 3D image (you can rotate the sky around manually, for example).
 
