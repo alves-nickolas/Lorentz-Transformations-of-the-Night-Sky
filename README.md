@@ -9,7 +9,7 @@ One of my favorite facts about physics is that the Lorentz group in $d=3+1$ dime
 
 ## The Code
 
-To get the positions and magnitudes of the stars, we use the Yale Bright Star Catalogue[^1]. This is accessed using Vizier[^2][^3], which in turn is queried with `astroquery`[^4]. Once the data is available, a few manipulations are done with AstroPy[^5][^6][^7] to get the coordinates in radians. This stuff is all handled in `ybsc-astropy.py`. Once the data is available in a `.csv` file, `Asymptote` [^8][^9] handles the plotting through `CKV.asy`.
+To get the positions and magnitudes of the stars, we use the Yale Bright Star Catalogue[^1]. This is accessed using Vizier[^2][^3], which in turn is queried with `astroquery`[^4]. Once the data is available, a few manipulations are done with AstroPy[^5][^6][^7] to get the coordinates in radians. This stuff is all handled in `ybsc-astropy.py`. Once the data is available in a `.csv` file, `Asymptote` [^8][^9] handles the plotting through `main.asy`.
 
 ## The Physics
 
@@ -22,22 +22,22 @@ Let us get to some examples. I wrote the code so that you can change most of the
 First, let us get a very detailed picture of the night sky. No boosts, no rotations. Just a `.png` output, high resolution, about 10 cm in size. To get all stars, we set `m_cutoff=15`. Be sure to make the sky dark. Saving it as `example-1.png`, we use the following code. 
 
 ```
-asy -u "size(10cm); m_cutoff=15; dark_background=true" -render 16 -f png -o example-1 CKV.asy
+asy -u "size(10cm); m_cutoff=15; dark_background=true" -render 16 -f png -o example-1 main.asy
 ```
 
 Here's our output:
 
-<img src="example-1.png" alt="example-1" width="75%">
+<img src="example-1.png" alt="example-1" width="100%">
 
 Next we try something different. Let us allow a smaller resolution (`-render 4`), less stars (so no improving the magnitude cutoff), not changing the output size (the default is 6 cm). However, put a 90° rotation about the vertical axis to change things a bit.
 
 ```
-asy -u "ang=pi/2; dark_background=true" -render 4 -f png -o example-2 CKV.asy
+asy -u "ang=pi/2; dark_background=true" -render 4 -f png -o example-2 main.asy
 ```
 
 The output is 
 
-<img src="example-2.png" alt="example-2" width="75%">
+<img src="example-2.png" alt="example-2" width="60%">
 
 The lower size and resolution make it a bit more cartoonish (but it renders faster).
 
@@ -45,17 +45,17 @@ The lower size and resolution make it a bit more cartoonish (but it renders fast
 Finally, let us try a boost. To make things crystal clear, we pick something at 75% of the speed of light. 
 
 ```
-asy -u "vel=0.75; dark_background=true" -render 4 -f png -o example-3 CKV.asy
+asy -u "vel=0.75; dark_background=true" -render 4 -f png -o example-3 main.asy
 ```
 
 This time we get
 
-<img src="example-3.png" alt="example-1" width="75%">
+<img src="example-3.png" alt="example-1" width="60%">
 
 If you want a simple visualization with a four-screw (a boost and a rotation about the same direction), which is the transformations I use in talks, try this code. Ajust the parameters of `vel` (boost velocity as a fraction of the speed of light) and `and` (rotation angle in radians) as you prefer. The `-V` setup will make the `Asymptote` visualization window popup, and show the full 3D image (you can rotate the sky around manually, for example).
 
 ```
-asy -u "vel=0; ang=0; dark_background=true" -V CKV.asy
+asy -u "vel=0; ang=0; dark_background=true" -V main.asy
 ```
 
 [^1]: D. Hoffleit and C. Jaschek. [*The Bright Star Catalogue*](https://cdsarc.cds.unistra.fr/viz-bin/cat/V/50). 5th Revised Edition. New Haven, CT: Yale University Observatory, 1999.
